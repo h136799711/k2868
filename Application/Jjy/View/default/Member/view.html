@@ -1,0 +1,69 @@
+<extend name="template/base_index" />
+
+
+<block name="area_header">
+
+</block>
+
+<block name="area_body">
+	{:W('Menus/topbar')}
+	<div class="admin-main container-fluid">
+		{:W('Menus/left')}
+		<div class="admin-main-content">
+			{:W('Menus/breadcrumb')}
+			<div class="table-responsive well">
+				<div class="btn-controls">
+					<a href="{:U('Jjy/Member/index')}" class="btn btn-default btn-sm"><i class="fa fa-reply"></i>{:L('BTN_BACK')}</a>
+				</div>
+				<form action="#" method="post" class="accountForm form-horizontal">
+					<fieldset>
+						<legend>{:L('VIEW_ACCOUNT_VIEW')}</legend>
+					</fieldset>
+					<!--<div class="form-group">
+						<label class="col-lg-2 col-md-2 control-label">{:L('M_MEMBER_USERNAME')}</label>
+						<div class="col-lg-10 col-md-10">
+							<label class="control-label">{$entity.username}</label>
+						</div>
+					</div>-->
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 control-label">{:L('M_MEMBER_REALNAME')}</label>
+						<div class="col-lg-10 col-md-10 ">
+							<label class="control-label">{$entity.realname}</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 control-label">{:L('M_MEMBER_MOBILE')}</label>
+						<div class="col-lg-10 col-md-10">
+							<label class="control-label">{$entity.mobile}</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 control-label">{:L('M_MEMBER_EMAIL')}</label>
+						<div class="col-lg-10 col-md-10">
+							<label class="control-label">{$entity.email}</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 control-label">{:L('M_MEMBER_IDNUMBER')}</label>
+						<div class="col-lg-10 col-md-10"><label class="control-label">{$entity.idnumber}</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 control-label">{:L('M_MEMBER_ORGCODE')}</label>
+						<div class="col-lg-10 col-md-10">
+							<label class="control-label">{$entity.orgcode}</label>
+						</div>
+					</div>
+
+
+				</form>
+			</div>
+		</div>
+		<!-- END admin-main-content -->
+	</div>
+	<!-- END admin-main-->
+</block>
+
+<block name="area_footer">
+
+</block>

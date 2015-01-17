@@ -1,0 +1,25 @@
+<extend name="template/home_index" />
+<block name="area_header">
+</block>
+<block name="area_body">	
+	<div class="body-content clearfix text-center">
+		<div class="h3">请选择存款方式</div>
+		<div class="btn-group-lg">
+			<div class="btn-controls hidden-xs">
+				  <button type="button" class="btn btn-lg btn-default" onclick="myUtils.redirectTo('{:U('Jjy/Home/manualdeposit')}');">手工存款</button>
+				  <button type="button" class="btn btn-lg btn-default" onclick="myUtils.redirectTo('{:U('Jjy/Home/speeddeposit')}');" >工行速汇</button>
+				  <button type="button" class="btn btn-lg btn-default" onclick="myUtils.TODO();">在线存款</button>
+			</div>
+		</div>
+		<div class="btn-group-sm visible-xs">
+			<div class="btn-controls">
+				  <button type="button" class="btn btn-sm btn-default" onclick="myUtils.redirectTo('{:U('Jjy/Home/manualdeposit')}');">手工存款</button>
+				  <button type="button" class="btn btn-sm btn-default" onclick="myUtils.redirectTo('{:U('Jjy/Home/speeddeposit')}');">工行速汇</button>
+				  <button type="button" class="btn btn-sm btn-default" onclick="myUtils.TODO();">在线存款</button>
+			</div>
+		</div>
+	</div>
+	<include file="footer_nav" /> {__NORUNTIME__}
+</block>
+<block name="area_footer">
+</block>

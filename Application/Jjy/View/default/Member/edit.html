@@ -1,0 +1,79 @@
+<extend name="template/base_index" />
+
+
+<block name="area_header">
+
+</block>
+
+<block name="area_body">
+	{:W('Menus/topbar')}
+	<div class="admin-main container-fluid">
+		{:W('Menus/left')}
+		<div class="admin-main-content">
+			{:W('Menus/breadcrumb')}
+
+			<div class="table-responsive well">
+				<form action="{:U('Jjy/Member/save',array('id'=>$entity['id']))}" method="post" class="accountForm form-horizontal">
+					<fieldset>
+						<legend>{:L('VIEW_ACCOUNT_EDIT')}</legend>
+					</fieldset>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 control-label">{:L('M_MEMBER_NICKAME')}</label>
+						<div class="col-lg-10 col-md-10">
+							<input name="nickname" class="form-control input-normal" value="{$entity.nickname}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 control-label">{:L('M_MEMBER_REALNAME')}</label>
+						<div class="col-lg-10 col-md-10">
+							<input name="realname" class="form-control input-normal" value="{$entity.realname}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 control-label">{:L('M_MEMBER_MOBILE')}</label>
+						<div class="col-lg-10 col-md-10">
+							<input name="mobile" class="form-control input-normal" value="{$entity.mobile}" />
+						</div>
+					</div>
+					
+
+					
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 control-label">{:L('M_MEMBER_EMAIL')}</label>
+						<div class="col-lg-10 col-md-10">
+							<input name="email" class="form-control input-normal" value="{$entity.email}" />
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 control-label">{:L('M_MEMBER_IDNUMBER')}</label>
+						<div class="col-lg-10 col-md-10">
+							<input name="idnumber" class="form-control input-normal" value="{$entity.idnumber}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 control-label">{:L('M_MEMBER_ORGCODE')}</label>
+						<div class="col-lg-10 col-md-10">
+							<input name="orgcode" class="form-control input-normal" value="{$entity.orgcode}" />
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-lg-2 col-md-2 control-label">&nbsp;</label>
+						<div class="col-lg-10 col-md-10">
+							<a target-form="accountForm" href="{:U('Jjy/Member/save',array('id'=>$entity['id']))}" class="ajax-post btn btn-primary"><i class="fa fa-save"></i>{:L('BTN_SAVE')}</a>
+							<a class="btn" href="{:U('Jjy/Member/index')}"><i class="fa fa-times-circle"></i>{:L('BTN_CANCEL')}</a>
+						</div>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+		<!-- END admin-main-content -->
+	</div>
+	<!-- END admin-main-->
+</block>
+
+<block name="area_footer">
+
+</block>

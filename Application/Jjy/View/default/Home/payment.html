@@ -1,0 +1,155 @@
+<extend name="template/home_index" />
+<block name="area_header">
+	<include file="template/online_service" />
+	
+	<script type="text/javascript" src="__CDN__/zeroclipboard/2.2.0/ZeroClipboard.min.js"></script>
+	<style type="text/css">
+		.header-nav {
+			background: url(__IMG__/bg-nav.png) repeat;
+		}
+		.header {
+			background: url(__IMG__/logo.png) no-repeat bottom left;
+		}
+		.main-content-holder-title {
+			background: url(__IMG__/title_bg_content.png) no-repeat;
+		}
+		
+	</style>
+
+</block>
+<block name="area_body">
+	
+		<div class="body-content clearfix">
+		<include file="header_nav" active="2" />
+
+		<div class="row col-lg-12 col-md-12 help-block">您好,此界面仅供您查询收款账号及存款成功后提交详细存款信息供审核人员查询及确认,并不具备转账及扣款功能.如您未进行或未完成存款操作请不要随意提交存款信息.感谢配合.</div>
+
+		<div class="main-content-holder clearfix">
+			<div class="table-responsive well">
+
+				<form class="form-horizontal" method="post">
+					<fieldset>
+						<legend>
+
+						</legend>
+
+						<!--<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4 col-sm-4">姓名</label>
+							<div class="col-lg-8 col-md-8 col-sm-8">
+								<label class="control-label">{$user}</label>
+							</div>
+						</div>-->
+
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4 col-sm-4">付款银行卡姓名</label>
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<label class="form-control">{$user}</label>
+							</div>
+						</div>
+						
+						
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4 col-sm-4">存入银行</label>
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<label class="form-control">{:getBankNameBy($bank['bank_type'])}</label>
+								<!--<label class="control-label">中国工商银行</label>-->
+								
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4 col-sm-4">存入卡号</label>
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<label class="form-control">{$bank.account}</label>
+								<!--<label class="control-label">6212 2612 0202 0761 855</label>-->
+								
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4">		
+								<a class="btn btn-info copybutton" data-clipboard-text="{$bank.account}">复制卡号</a>
+								<!--<a class="btn btn-info copybutton" data-clipboard-text="6212261202020761855">复制卡号</a>-->
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4 col-sm-4">存入姓名</label>
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<label class="form-control">{$bank.account_name}</label>
+								<!--<label class="control-label">秦伟</label>-->
+								
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4">								
+								<a class="btn btn-info copybutton" data-clipboard-text="{$bank.account_name}">复制名字</a>						
+								<!--<a class="btn btn-info copybutton" data-clipboard-text="秦伟">复制名字</a>-->
+								
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4 col-sm-4">金额</label>
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<label class="form-control">{$money}</label>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4">								
+								<a class="btn btn-info copybutton" data-clipboard-text="{$money}">复制金额</a>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4 col-sm-4">开户城市</label>
+							<div class="col-lg-4 col-md-4 col-sm-4">
+								<label class="form-control">{$bank.bank_name}</label>
+								<!--<label class="control-label">杭州洄澜支行</label>-->
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-4">	
+								<a class="btn btn-info copybutton" data-clipboard-text="{$bank.bank_name}">复制开户城市</a>
+							</div>
+						</div>
+						<!--<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4">预留信息</label>
+							<div class="col-lg-8 col-md-8">
+								<label class="control-label bg-primary">{$user.remark}</label>
+								<span class="help-block">请您仔细核对预留信息是否正确，如与您实际预留信息不符，请您立即暂停操作并联系客服。</span>
+							</div>
+						</div>-->
+						
+						<div class="form-group">
+							<label class="text-right col-lg-4 col-md-4 col-sm-3">
+											<a class="btn btn-link" href="{:U('Jjy/Home/speeddeposit')}" title="返回" target="_blank">返回</a></label>
+							<div class="col-lg-4 col-md-4 col-sm-4">
+											<a class="btn btn-primary" href="{:getBankType($bank['bank_type'])['homepage']}" title="立即前往" target="_blank">立即前往{:getBankType($bank['bank_type'])['name']}付款</a>
+										
+							</div>
+						</div>
+						
+						
+					</fieldset>
+				</form>
+				
+				<div class="panel panel-warning center-block col-lg-8 col-md-8 col-lg-push-2 col-md-push-2">
+			      <div class="panel-heading">
+			        <h3 class="panel-title">温馨提示</h3>
+			      </div>
+			      <div class="panel-body">
+			       	<p class="text-info h5"> 安全提醒：因网上木马病毒较多，请务必通过我们页面"立即前往**银行付款"按钮，进入相关的银行
+</p>
+			      </div>
+			    </div>
+			</div>
+
+		</div>
+	</div>
+	<include file="footer_nav" />
+</block>
+
+<block name="area_footer">
+	<script type="text/javascript">
+	$(function(){
+		var client = new ZeroClipboard( $(".copybutton") );
+
+			client.on( "ready", function( readyEvent ) {
+			  client.on( "aftercopy", function( event ) {
+			    alert("复制成功！");
+			  } );
+			} );
+	});
+	</script>
+
+	{__NORUNTIME__}
+</block>

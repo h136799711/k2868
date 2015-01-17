@@ -1,0 +1,99 @@
+<extend name="template/base_index" />
+
+
+<block name="area_header">
+
+</block>
+
+<block name="area_body">
+	{:W('Menus/topbar')}
+	<div class="admin-main container-fluid">
+		{:W('Menus/left')}
+		<div class="admin-main-content">
+			{:W('Menus/breadcrumb')}
+			<div class="well table-responsive">
+				<div class="btn-controls">
+					<a href="{:U('Jjy/RemittanceRecord/index')}" class="btn btn-default btn-sm"><i class="fa fa-reply"></i>{:L('BTN_BACK')}</a>
+				</div>
+				<form class="form-horizontal">
+					<fieldset>
+						<legend>存款信息单查看</legend>
+
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">收款人</label>
+							<div class="col-lg-10 col-md-10">
+								<label class="control-label">
+									{$entity.deposit_username}
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">收款银行开户地</label>
+							<div class="col-lg-10 col-md-10">
+								<label class="control-label">
+									{$entity.deposit_bank_address}
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">收款银行账户</label>
+							<div class="col-lg-10 col-md-10">
+								<label class="control-label">
+									{$entity.deposit_bank_account}
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">金额</label>
+							<div class="col-lg-10 col-md-10">
+								<label class="control-label">
+									{$entity.money}
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">存款方式</label>
+							<div class="col-lg-10 col-md-10">
+
+								<label class="control-label">
+									{$entity.depositType|getDepositType}
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">存款时间</label>
+							<div class="col-lg-10 col-md-10">
+								<label class="control-label">
+									{$entity.transaction_date|date="Y/m/d H:i:s",###}
+								</label>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">存款人</label>
+							<div class="col-lg-10 col-md-10">								
+								<label class="control-label">
+									{$entity.username}
+								</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">预留信息</label>
+							<div class="col-lg-10 col-md-10">						
+								<label class="control-label">
+									{$entity.remark}
+								</label>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<!-- END admin-main-content -->
+	</div>
+	<!-- END admin-main-->
+</block>
+
+<block name="area_footer">
+
+</block>

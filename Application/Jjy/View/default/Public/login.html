@@ -1,0 +1,63 @@
+<extend name="template/base_index" />
+
+<block name="area_header">
+	<link type="text/css" rel="stylesheet" href="__CDN__/comp/login.css?c=__APP_VERSION__" />
+	<script src="__CDN__/jquery-validation/1.13.1/jquery.validate.min.js"></script>
+	<script src="__CDN__/jquery-validation/1.13.1/localization/messages_zh.min.js"></script>
+</block>
+
+<block name="area_body">
+	<!-- 登录框 -->
+	<div class="login">
+		<div class="modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title text-center login-status">
+						登录
+					</h4>
+					</div>
+
+					<div class="modal-body">
+						<form action="" class="loginForm form clearfix" method="post">
+							<div class="form-group form-group-sm">
+								<div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<input type="text" class="form-control required username" name="username" placeholder="{:L('PLACEHOLDER_USERNAME')}" />
+									<i class="fa fa-user"></i>
+								</div>
+							</div>
+							<div class="form-group form-group-sm">
+								<div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<input type="password" class="form-control required password" name="password" placeholder="{:L('PLACEHOLDER_PASSWORD')}" /><i class="fa fa-lock"></i>
+								</div>
+							</div>
+							<div class="form-group form-group-sm has-spinner">
+								<button type="button" url="{:U('Jjy/Public/checkLogin')}" target-form="loginForm" data-loading-text="{:L('BTN_LOGIN')}..." class="ajax-post btn btn-primary col-xs-12 col-sm-12 col-md-12 col-lg-12" autofocus="autofocus">
+{:L('BTN_LOGIN')}</button>
+							</div>
+						</form>
+
+						<div class="text-center">
+							<button type="button" class="btn btn-link" onclick="myUtils.redirectTo('{:U('Jjy/Public/register')}');">{:L('BTN_REGISTER')}</button>
+						</div>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+
+<block name="area_footer">
+	<script>
+		$(function() {
+			$(".loginForm").validate();
+		})
+		
+		 $(document).keydown(function(event) {
+			if (event.keyCode == 13) {
+				$(".ajax-post").click();
+			}
+		});
+	</script>
+</block>

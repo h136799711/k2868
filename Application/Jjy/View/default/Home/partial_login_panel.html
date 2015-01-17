@@ -1,0 +1,19 @@
+<empty name="user">
+	<form class="loginForm form-inline" action="{:U('Jjy/Public/checkLogin')}" method="post">
+		<div class="form-group-lg">
+			<div class="input-group">
+				<span class="input-group-addon"><i class="fa fa-2x fa-user"></i></span>
+				<input class="form-control" id="loginform_loginname" type="text" tabindex="1" name="username" value="请输入交易平台账号" placeholder="请输入交易平台账号" tabindex="1" onfocus="if(this.value=='请输入交易平台账号')this.value=''" onblur="if(this.value=='')this.value='请输入交易平台账号'">
+
+				<span class="input-group-addon">
+					<a class="ajax-post " target-form="loginForm" href="{:U('Jjy/Public/checkLogin')}" tabindex="2">安全登录</a>
+				</span>
+			</div>
+		</div>
+	</form>
+	<else />
+	<script type="text/javascript">
+		window.location.href = "{:U('Jjy/Home/choose')}";
+	</script>
+
+</empty>

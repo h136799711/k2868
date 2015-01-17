@@ -1,0 +1,260 @@
+<extend name="template/home_index" />
+<block name="area_header">
+	<include file="template/online_service" />
+
+	<script type="text/javascript" src="__CDN__/validation/1.0.0/index.js"></script>
+	<script type="text/javascript" src="__CDN__/jquery-validation/1.13.1/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="__CDN__/jquery-validation/1.13.1/localization/messages_zh.min.js"></script>
+
+	<style type="text/css">
+		.header-nav {
+			background: url(__IMG__/bg-nav.png) repeat;
+		}
+		.header {
+			background: url(__IMG__/logo.png) no-repeat bottom left;
+		}
+		.main-content-holder-title {
+			background: url(__IMG__/title_bg_content.png) no-repeat;
+		}
+		.label {
+			width: 100px;
+			text-align: right;
+			padding: 0px;
+			font-size: 100%;
+			vertical-align: middle;
+			display: table-cell;
+			color: #4b2306;
+		}
+		.btn-submit {
+			display: inline-block;
+			padding: 6px 12px;
+			margin-bottom: 0;
+			font-size: 14px;
+			font-weight: 400;
+			line-height: 1.42857143;
+			text-align: center;
+			white-space: nowrap;
+			vertical-align: middle;
+			-ms-touch-action: manipulation;
+			touch-action: manipulation;
+			cursor: pointer;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			background-image: none;
+			border: 1px solid transparent;
+			border-radius: 4px;
+			color: #fff;
+			background-color: #428bca;
+			border-color: #357ebd;
+		}
+		input.error {
+			border: 1px solid red;
+		}
+		label.checked {
+			background: url("__IMG__/yes.gif") no-repeat 0px 0px;
+			padding-left: 25px;
+		}
+		label.error {
+			background: url("__IMG__/no.gif") no-repeat 0px 0px;
+			padding-left: 25px;
+			padding-bottom: 2px;
+			font-weight: bold;
+			color: #EA5200;
+		}
+		.sdpaydemo{
+			padding: 10px;
+			background: #1c150a;
+			margin-left: 0px;
+			margin-bottom: 10px;
+		}
+		.sdpaydemo a{
+			margin-left: 20px;
+			margin-right: 25px;
+		}
+	</style>
+
+</block>
+<block name="area_body">
+	<div class="header">
+		<div class="top-link">
+			<a href="javascript:myUtils.setHome(this,window.location)"><i class="fa fa-home"></i>设为首页</a>
+			<a href="javascript:myUtils.addFavorite(window.location,document.title)"><i class="fa fa-heart"></i>加入收藏</a>
+		</div>
+		<div class="login clearfix">
+			<include file="partial_login_panel" />
+		</div>
+	</div>
+	<div class="header-nav">
+		<include file="header_nav" active="0" />
+	</div>
+	<div class="body-content clearfix">
+		<div class="main-content-holder clearfix">
+			<div class="main-content-holder-title">
+				在线充值
+				<img src="__IMG__/arow.png" height="11" width="10">
+			</div>
+			<div class="btn-toolbar sdpaydemo" role="toolbar">
+				<div class="btn-group">
+					<a href="__PUBLIC__/html/sdpaydemoa1.html" target="_search">
+						<img src="__IMG__/asa1.jpg" />
+					</a>
+					<a href="__PUBLIC__/html/sdpaydemoa2.html" target="_search">
+						<img src="__IMG__/asa2.jpg" />
+					</a>
+					<a href="__PUBLIC__/html/sdpaydemoa3.html" target="_search">
+						<img src="__IMG__/asa3.jpg" />
+					</a>
+					<a href="__PUBLIC__/html/sdpaydemoall.html" target="_search">
+						<img src="__IMG__/asa4.jpg" />
+					</a>
+					
+				</div>
+			</div>
+			<div class="table-responsive well">
+				<form class="form-horizontal"  method="post" action="{:U('Jjy/Home/payment')}">
+					<fieldset>
+						<legend class="h5">
+							请详细填写以下表格，带* 项目为必填项目
+						</legend>
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4">用户账号</label>
+							<div class="col-lg-8 col-md-8">
+								<label class="control-label">{$user.username}</label>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4">金额</label>
+							<div class="col-lg-4 col-md-4">
+								<input name="money" class="form-control"  />
+							</div>
+							<div class="col-lg-4 col-md-4">
+								<span class="help-block">最小充值金额为 100</span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4">*充值银行卡用户名</label>
+							<div class="col-lg-4 col-md-4">
+								<input name="account_name" class="form-control" value="{$user.realname}" />
+							</div>
+							<div class="col-lg-4 col-md-4">
+								<span class="help-block">请正确填写要进行充值的银行卡的用户名,否则会导致充值不成功</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4">预留信息</label>
+							<div class="col-lg-4 col-md-4">
+								<label class="control-label bg-primary remark">{$user.remark}</label>
+							</div>
+							<div class="col-lg-4 col-md-4">
+								<span class="help-block">请您仔细核对预留信息是否正确，如与您实际预留信息不符，请您立即暂停操作并联系客服。</span>
+							</div>
+
+
+						</div>
+						<hr>
+
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4">选择支付方式</label>
+							<div class="col-lg-8 col-md-8">
+								<div class="radio">
+									<label>
+										<input name="paytype" value="1" type="radio" checked="checked">支付方式一 (开启)
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4">请选择收款银行</label>
+							<div class="col-lg-8 col-md-8">
+								<div class="radio">
+									<label>
+										
+										<input name="bankaccountid" value="{$bankaccount.id}" type="radio" checked="checked">{:getBankNameBy($bankaccount['bank_type'])}(开启)
+									</label>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-lg-4 col-md-4">&nbsp;</label>
+							<div class="col-lg-8 col-md-8">
+								<button type="submit" id="btn_submit" class="btn btn-primary" >提交</button>
+							
+							</div>
+
+						</div>
+					</fieldset>
+				</form>
+
+				<!--<div class="panel panel-warning center-block col-lg-8 col-md-8 col-lg-push-2">
+					<div class="panel-heading">
+						<h3 class="panel-title">帮助中心</h3>
+					</div>
+					<div class="panel-body">
+						<p class="text-danger h5"> 安全提醒：因网上木马病毒较多，请务必通过我们页面"立即前往**银行付款"按钮，进入相关的银行
+						</p>
+					</div>
+				</div>-->
+			</div>
+
+		</div>
+	</div>
+	<include file="footer_nav" />
+</block>
+
+<block name="area_footer">
+	<script type="text/javascript">
+		$(function() {
+			refresh('.verify');
+			
+			
+			
+			//是否中文名字
+			$.validator.addMethod("isCnName", function(value, element) {
+				var tel = /[a-z0-9.*?,(!)&amp;%$^……！·￥——（）　#@]/g;
+				return this.optional(element) || !(tel.test(value));
+			}, "请填写正确的姓名");
+			
+
+			$("#registerForm").validate({
+				errorPlacement: function(error, element) {
+					$(".checked", element.parent()).remove();
+					error.appendTo(element.parent());
+				},
+				success: function(label) {
+					label.removeClass("error").addClass("checked").text("Ok!");
+				},
+
+				rules: {
+					money: {
+						required: true,
+						number:true,
+					},
+					account_name: {
+						required: true,
+						isCnName: true,
+						min:0,
+					}
+				},
+				messages: {
+					money:{
+						required:"必须填写",
+						min:"金额必须大于0",
+						number:"金额必须为数字",
+					},
+					account_name: {
+						required: "真实姓名必须填写",
+						isCnName:"请输入真实姓名"
+					},
+				}
+			}); //end validate
+
+		}); //end ready
+	</script>
+	{__NORUNTIME__}
+</block>

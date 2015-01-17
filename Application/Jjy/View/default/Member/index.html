@@ -1,0 +1,83 @@
+<extend name="template/base_index" />
+
+
+<block name="area_header">
+
+</block>
+
+<block name="area_body">
+	{:W('Menus/topbar')}
+	<div class="admin-main container-fluid">
+		{:W('Menus/left')}
+		<div class="admin-main-content">
+			{:W('Menus/breadcrumb')}
+
+			<div class="table-responsive well">
+				<div class="form-control-static">
+					<form action="{:U('Jjy/Member/index')}" method="post" class="form-inline">
+						<div class="form-group">
+							<label class="control-label">{:L('M_MEMBER_REALNAME')}</label>
+							<input name="realname" class="form-control input-short" value="{:I('realname','')}" />
+						</div>
+						<div class="form-group ">
+							<button type="submit" class="btn btn-default btn-sm"><i class="fa fa-search"></i>{:L('BTN_SEARCH')}</button>
+						</div>
+					</form>
+				</div>
+				<div class="btn-controls">
+				</div>
+				<table class="table table-striped table table-hover table-condensed ">
+					<thead>
+						<tr>
+							<th>{:L('ID')}</th>
+							<th>{:L('M_MEMBER_REALNAME')}</th>
+							<th>{:L('M_MEMBER_IDNUMBER')}</th>
+							<th>{:L('M_MEMBER_MOBILE')}</th>
+							<th>{:L('M_MEMBER_ORGCODE')}</th>
+							<th>{:L('OPERATOR')}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<empty name="list">
+							<tr>
+								<td colspan="6" class="text-center" >{:L('NO_DATA')}</td>
+							</tr>
+						</empty>
+						<volist name="list" id="vo">
+							<tr>
+								<td>
+									{$vo.uid}
+								</td>
+								<td>
+									<a href="{:U('Jjy/Member/view',array('id'=>$vo['uid']))}">{$vo.realname}</a>
+								</td>
+								<td>
+									{$vo.idnumber}
+								</td>
+								<td>
+									{$vo.mobile}
+								</td>
+								<td>
+									{$vo.orgcode}
+								</td>
+								<td>
+									<a class="btn btn-default btn-sm" href="{:U('Jjy/Member/resetpwd',array('id'=>$vo['uid']))}">{:L('BTN_RESET_PWD')}</a>
+									<a class="btn btn-default btn-sm" href="{:U('Jjy/Member/edit',array('id'=>$vo['uid']))}">{:L('BTN_EDIT')}</a>
+									
+								</td>
+							</tr>
+
+						</volist>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- END admin-main-content -->
+	</div>
+	<!-- END admin-main-->
+</block>
+
+<block name="area_footer ">
+
+</block>

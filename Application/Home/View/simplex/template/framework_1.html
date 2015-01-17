@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="utf-8">
+		<title>{$seo.title|default="标题"}__APP_VERSION__</title>
+		<meta name="keywords" content="{$seo.keywords|default=""}" />
+		<meta name="description" content="{$seo.description|default=""}" />
+		<meta name="author" content="{$varsConfig.company|default="Gooraye"}" />
+		<!-- 系统基本样式 -->
+		<link type="text/css" rel="stylesheet" href="__CDN__/bootstrap/3.3.0/css/bootstrap.min.css" />
+		<!-- 自定义样式 -->
+		<link type="text/css" rel="stylesheet" href="__CDN__/theme/{$varsConfig.theme|default="flatly"}.min.css" />
+		
+		<!-- 脚本 -->		
+		<script type="text/javascript" src="__CDN__/jquery/2.1.1/jquery.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="__CDN__/bootstrap/3.3.0/js/bootstrap.min.js" />
+		
+		<block name="area_header"><!--顶部区域 --></block>
+		
+	</head>
+	
+<body>
+		
+		<block name="area_body"><!--内容区域 --></block>
+		<block name="area_footer"><!--底部区域 --></block>
+		<!-- 统计代码 -->
+		<script type="text/javascript">
+			{$varsConfig.tjScripts|default=""}
+		</script>
+		
+		<div class="well">
+			{__RUNTIME__}
+		</div>
+</body>
+
+</html>

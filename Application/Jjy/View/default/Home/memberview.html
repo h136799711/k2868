@@ -1,0 +1,275 @@
+<extend name="template/home_index" />
+<block name="area_header">
+	<include file="template/online_service" />
+
+	<link rel="stylesheet" type="text/css" media="all" href="__CDN__/jquery-datetimepicker/jquery.datetimepicker.css">
+	<script type="text/javascript" src="__CDN__/jquery-datetimepicker/jquery.datetimepicker.js"></script>
+	<script type="text/javascript" src="__CDN__/validation/1.0.0/index.js"></script>
+	<script type="text/javascript" src="__CDN__/jquery-validation/1.13.1/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="__CDN__/jquery-validation/1.13.1/localization/messages_zh.min.js"></script>
+
+	<style type="text/css">
+		.header-nav {
+			background: url(__IMG__/bg-nav.png) repeat;
+		}
+		.header {
+			background: url(__IMG__/logo.png) no-repeat bottom left;
+		}
+		.main-content-holder-title {
+			background: url(__IMG__/title_bg_content.png) no-repeat;
+		}
+		.left-nav .title {
+			background: url(__IMG__/small_title_pakners.jpg) no-repeat;
+		}
+		.label {
+			width: 100px;
+			text-align: right;
+			padding: 0px;
+			font-size: 100%;
+			vertical-align: middle;
+			display: table-cell;
+			color: #4b2306;
+		}
+	</style>
+
+</block>
+<block name="area_body">
+	<div class="header">
+		<div class="top-link">
+			<a href="javascript:myUtils.setHome(this,window.location)"><i class="fa fa-home"></i>设为首页</a>
+			<a href="javascript:myUtils.addFavorite(window.location,document.title)"><i class="fa fa-heart"></i>加入收藏</a>
+		</div>
+		<div class="login clearfix">
+			<include file="partial_login_panel" />
+		</div>
+	</div>
+	<div class="header-nav">
+		<include file="header_nav" active="0" />
+	</div>
+	<div class="body-content clearfix">
+		<div class="main-content-holder clearfix">
+			<div class="main-content-holder-title">
+				会员信息
+				<img src="__IMG__/arow.png" height="11" width="10">
+			</div>
+			<div class="pull-left text-center well left-nav">
+				<include file="left_nav" />
+			</div>
+			<div class="pull-left right-content">
+			<div class="table-responsive well">
+				<ul id="myTab" class="nav nav-tabs" role="tablist">
+					<li role="presentation"><a data-toggle="tab" role="tab" href="#changepwd">修改密码</a>
+					</li>
+					<li role="presentation" class="active"><a data-toggle="tab" role="tab" href="#personal">个人资料</a>
+					</li>
+				</ul>
+
+				<div id="myTabContent" class="tab-content clearfix">
+					<!--                    	
+						作者：hebiduhebi@126.com
+                    	时间：2015-01-01
+                    	描述：修改密码
+                    -->
+					<div id="changepwd" role="tab-pane" class="tab-pane fade">
+						<form class="changepwdForm form-horizontal validate-form" method="post">
+							<fieldset>
+								<legend>
+									&nbsp;
+								</legend>
+								<div class="form-group">
+									<label class="control-label col-lg-2 col-md-2">原密码</label>
+									<div class="col-lg-4 col-md-4">
+										<input id="old" name="old" type="password" class="form-control" />
+									</div>
+									<div class="help-block col-lg-4 col-md-4">
+
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-lg-2 col-md-2">*新密码</label>
+									<div class="col-lg-4 col-md-4">
+										<input id="password" name="password" type="password" class="form-control" />
+									</div>
+									<div class="help-block col-lg-4 col-md-4">
+										注意:密码长度应大于等于6位且小于等于10位！
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-lg-2 col-md-2">*确认密码</label>
+									<div class="col-lg-4 col-md-4">
+										<input id="repassword" name="repassword" type="password" class="form-control" />
+									</div>
+									<div class="help-block col-lg-4 col-md-4">
+										注意:密码长度应大于等于6位且小于等于10位！
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-lg-2 col-md-2">&nbsp;</label>
+									<div class="col-lg-4 col-md-4">
+										<a class="btn btn-primary ajax-post" target-form="changepwdForm" href="{:U('Jjy/Member/changepwd')}">{:L('BTN_SAVE')}</a>
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+					<!--
+                    	作者：hebiduhebi@126.com
+                    	时间：2015-01-01
+                    	描述：个人资料
+                    -->
+					<div id="personal" role="tab-pane" class="tab-pane fade in active">
+
+						<form class="personalForm form-horizontal" method="post">
+							<fieldset>
+								<legend>
+									&nbsp;</legend>
+									
+								<div class="form-group">
+									<label class="control-label col-lg-2 col-md-2">性别</label>
+									<div class="col-lg-4 col-md-4">
+										<select name="sex" class="form-control">
+											<option value="0" <eq name="user.sex" value="0">selected="selected"</eq> >男</option>
+											<option value="1" <eq name="user.sex" value="1">selected="selected"</eq> >女</option>
+										</select>
+									</div>
+									<div class="help-block col-lg-4 col-md-4">
+										
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-lg-2 col-md-2">出生日期</label>
+									<div class="col-lg-4 col-md-4">
+										<input id="birthday" name="birthday" value="{$user.birthday}" class="form-control" />
+									</div>
+									<div class="help-block col-lg-4 col-md-4">
+										
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-2 col-md-2">联系电话</label>
+									<div class="col-lg-4 col-md-4">
+										<label class="control-label">{:substr_replace($user['mobile'],'*******',1,strlen($user['mobile'])-3)}</label>
+									</div>
+									<div class="help-block col-lg-4 col-md-4">
+										
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-2 col-md-2">联系地址</label>
+									<div class="col-lg-4 col-md-4">
+										<input id="address" name="address" class="form-control" value="{$user.address}" />
+									</div>
+									<div class="help-block col-lg-4 col-md-4">
+										
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-lg-2 col-md-2">邮箱地址</label>
+									<div class="col-lg-4 col-md-4">
+										<input id="email" name="email" class="form-control" value="{$user.email}" />
+									</div>
+									<div class="help-block col-lg-4 col-md-4">
+										
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<label class="control-label col-lg-2 col-md-2">预留信息</label>
+									<div class="col-lg-4 col-md-4">
+										<input id="remark" name="remark" class="form-control" value="{$user.remark}" />
+									</div>
+									<div class="help-block col-lg-4 col-md-4">
+										
+									</div>
+								</div>
+								
+								
+								<div class="form-group">
+									<label class="control-label col-lg-2 col-md-2">&nbsp;</label>
+									<div class="col-lg-4 col-md-4">
+										<a class="btn btn-primary ajax-post" target-form="personalForm" href="{:U('Jjy/Member/save',array('uid'=>$user['uid']))}">{:L('BTN_SAVE')}</a>
+									</div>
+								</div>
+
+							</fieldset>
+						</form>
+					</div>
+
+				</div>
+
+
+
+			</div>
+			</div>
+		</div>
+	</div>
+	<include file="footer_nav" />
+	
+</block>
+
+<block name="area_footer">
+	<script type="text/javascript">
+		$(function() {
+			$('#birthday').datetimepicker({
+				format: 'Y-m-d',
+				formatDate: 'Y-m-d',
+				timepicker: false,
+				lang: 'ch'
+			});
+			refresh('.verify');
+			$(".changepwdForm").validate({
+						errorPlacement: function(error, element) {
+							$(".checked", element.parent()).remove();
+							error.appendTo(element.parent());
+						},
+						success: function(label) {
+							label.removeClass("error").addClass("checked").text("Ok!");
+						},
+						rules: {
+							old:{
+								required:true,
+								minlength:6
+							},
+							password:{
+								required:true,
+								minlength:6,
+								maxlength:10
+							},
+							repassword: {
+								required: true,
+								equalTo:"#password",
+								minlength:6,
+								maxlength:10
+							},
+							remark:{
+								required: true,
+							}
+						},
+						messages: {
+							old:{
+								required:"请输入原密码",
+							},
+							password:{
+								required:"请输入新密码",
+								minlength:"密码必须大于{0}个字符",
+								maxlength:"密码必须小于{0}个字符",
+							},
+							repassword:{
+								required:"请输入确认密码",
+								equalTo:"新密码不一致",
+								minlength:"密码必须大于{0}个字符",
+								maxlength:"密码必须小于{0}个字符",
+							},
+							remark:{
+								required:"请输入预留信息"
+							}
+							
+						}
+					}); //end validate
+
+		}); //end ready
+	</script>
+	{__NORUNTIME__}
+</block>

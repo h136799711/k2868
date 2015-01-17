@@ -1,0 +1,362 @@
+<extend name="template/home_index" />
+<block name="area_header">
+	<include file="template/online_service" />
+	
+	<script type="text/javascript" src="__CDN__/validation/1.0.0/index.js"></script>
+	<script type="text/javascript" src="__CDN__/jquery-validation/1.13.1/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="__CDN__/jquery-validation/1.13.1/localization/messages_zh.min.js"></script>
+	
+	<style type="text/css">
+		.header-nav {
+			background: url(__IMG__/bg-nav.png) repeat;
+		}
+		.header {
+			background: url(__IMG__/logo.png) no-repeat bottom left;
+		}
+		.main-content-holder-title {
+			background: url(__IMG__/title_bg_content.png) no-repeat;
+		}
+		.label {
+			width: 100px;
+			text-align: right;
+			padding: 0px;
+			font-size: 100%;
+			vertical-align:middle;
+			display: table-cell;
+			color: #4b2306;
+		}
+		.btn-submit {
+			display: inline-block;
+			padding: 6px 12px;
+			margin-bottom: 0;
+			font-size: 14px;
+			font-weight: 400;
+			line-height: 1.42857143;
+			text-align: center;
+			white-space: nowrap;
+			vertical-align: middle;
+			-ms-touch-action: manipulation;
+			touch-action: manipulation;
+			cursor: pointer;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			background-image: none;
+			border: 1px solid transparent;
+			border-radius: 4px;
+			color: #fff;
+			background-color: #428bca;
+			border-color: #357ebd;
+		}
+		input.error {
+			border: 1px solid red;
+		}
+		label.checked {
+			background: url("__IMG__/yes.gif") no-repeat 0px 0px;
+			padding-left: 25px;
+		}
+		label.error {
+			background: url("__IMG__/no.gif") no-repeat 0px 0px;
+			padding-left: 25px;
+			padding-bottom: 2px;
+			font-weight: bold;
+			color: #EA5200;
+		}
+		td{
+			padding-top: 10px;
+		}
+	</style>
+	<script>
+		
+		$(function(){
+		})
+	</script>
+</block>
+<block name="area_body">
+	<div class="header">
+		<div class="top-link">
+			<a href="javascript:myUtils.setHome(this,window.location)"><i class="fa fa-home"></i>设为首页</a>
+			<a href="javascript:myUtils.addFavorite(window.location,document.title)"><i class="fa fa-heart"></i>加入收藏</a>
+		</div>
+		<div class="login clearfix">
+			<include file="partial_login_panel" />
+		</div>
+	</div>
+	<div class="header-nav">
+		<include file="header_nav" active="0" />
+	</div>
+	<div class="body-content clearfix">
+		<div class="main-content-holder">
+			<div class="main-content-holder-title">
+				免费注册
+				<img src="__IMG__/arow.png" height="11" width="10">
+			</div>
+			<div id="tabs1-html">
+				<form id="registerForm" name="registerForm" action="{:U('Jjy/Home/register')}" method="post" autocomplete="off">
+					
+					<table width="64%" border="0" style=" color:#4b2306; font-size:14px;" cellspacing="8">
+						<tbody>
+							<tr>
+								<td class="error-place"></td>
+							</tr>
+							<tr>
+								<td colspan="4" height="30">* 符号代表必填项</td>
+							</tr>
+							<tr>
+								<td class="label">*登录账号</td>
+								<td colspan="2">
+									<!--<div class="input-group" style="width:100%">-->
+									<!--<div class="input-group-addon">{$prefix}</div>-->
+									<input type="text" class="require form-control" value="" name="username" id="username" autocomplete="off">
+									<!--</div>-->
+								</td>
+								<td>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="3">注意：请输入交易平台的账号设置为您的用户名</td>
+							</tr>
+							<tr>
+								<td class="label">*密码</td>
+								<td colspan="2">
+									<input name="password" class="form-control" id="password" type="password" autocomplete="off">
+								</td>
+								<td>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="3">注意：密码长度应大于等于6位且小于等于8位</td>
+							</tr>
+							<tr>
+								<td class="label">*确认密码</td>
+								<td colspan="2">
+									<input name="repassword"  maxlength="10" id="repassword" type="password" class="form-control" value="" autocomplete="off">
+								</td>
+								<td>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="label">*身份证号</td>
+								<td colspan="2">
+									<input type="text" class="form-control" name="idnumber" id="idnumber" autocomplete="off">
+								</td>
+								<td>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="3">注意：必须填写真实身份证号</td>
+							</tr>
+							<tr>
+								<td class="label">*真实姓名</td>
+								<td colspan="2">
+									<input type="text" class="form-control" name="realname" id="realname" maxlength="12" autocomplete="off">
+								</td>
+								<td>
+								</td>
+							</tr>
+
+							<tr>
+								<td></td>
+								<td colspan="3">注意：必须填写真实姓名</td>
+							</tr>
+							<tr>
+								<td class="label">*电话</td>
+								<td colspan="2">
+									<input type="text"  name="mobile" maxlength="13" id="mobile" autocomplete="off" class="require form-control">
+								</td>
+								<td>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="3">注意：必须填写正确联系电话</td>
+							</tr>
+
+							<tr>
+								<td class="label">*电子邮件</td>
+								<td colspan="2">
+									<input type="text" name="email" maxlength="50" value="" class=" form-control" >
+								</td>
+								<td>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="3">注意：请填写真实email</td>
+							</tr>
+							<tr>
+								<td class="label">*预留信息</td>
+								<td colspan="2">
+									<input type="text" id="remark" name="remark" class=" form-control" value="" >
+								</td>
+								<td>
+								</td>
+							</tr><tr>
+								<td></td>
+								<td colspan="3">注意：请认真填写预留信息</td>
+							</tr>
+							<tr>
+								<td class="label">机构代码</td>
+								<td colspan="2">
+									<input type="text" name="orgcode" class=" form-control" value="" >
+								</td>
+								<td>
+								</td>
+							</tr>
+							<tr>
+								<td class="label">*验证码</td>
+								<td colspan="2">
+									<input type="text" name="code"  maxlength="4" id="code" autocomplete="off" class=" form-control">
+
+								</td>
+								<td>
+
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td colspan="3">
+									<img src="{:U('Jjy/Public/verifylg')}" width="120" height="30" onclick="refresh('.verify2');" class="verify2" style="cursor:pointer"> <span id="Mess_CaptchaCode"> </span>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+									<label>
+										<input type="checkbox" id="agree_age" checked="checked">
+									</label>在提呈申请的同时，本人已超过合法年龄以及本人在此网站的所有活动并没有抵触本人所身在的国家所管辖的法律。</td>
+							</tr>
+							<tr>
+								<td colspan="4">
+									<label>
+										<input type="checkbox" id="agree_contract" checked="checked">
+									</label>本人也接受在此项申请下有关的所有规则与条例以及隐私声明。</td>
+							</tr>
+							<tr>
+								<td colspan="4" height="30">
+									<button id="btn-submit" class="btn-submit" type="submit">提交</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</form>
+
+
+
+
+			</div>
+		</div>
+	</div>
+	<include file="footer_nav" />
+</block>
+
+<block name="area_footer">
+	<script type="text/javascript">
+		$(function() {
+			refresh('.verify');
+			//是否中文名字
+			$.validator.addMethod("isCnName", function(value, element) {
+				var tel = /[a-z0-9.*?,(!)&amp;%$^……！·￥——（）　#@]/g;
+				return this.optional(element) || !(tel.test(value));
+			}, "请填写正确的姓名");
+			// 联系电话(手机/电话皆可)验证     
+			$.validator.addMethod("isPhone", function(value, element) {
+				var length = value.length;
+				var mobile = /^(((13[0-9]{1})|(15[0-9]{1}))+\d{8})$/;
+				var tel = /^\d{3,4}-?\d{7,9}$/;
+				return this.optional(element) || (tel.test(value) || mobile.test(value));
+
+			}, "请正确填写您的联系电话");
+			// 身份证号码验证         
+			$.validator.addMethod("isIdCardNo", function(value, element) {
+				return this.optional(element) || IdCardValidate(value);
+			}, "请正确输入您的身份证号码");
+
+			$("#registerForm").validate({
+				errorPlacement: function(error, element) {
+					$(".checked", element.parent()).remove();
+					error.appendTo(element.parent());
+				},
+				success: function(label) {
+					label.removeClass("error").addClass("checked").text("Ok!");
+				},
+
+				rules: {
+					idnumber: {
+						required: true,
+						isIdCardNo: true,
+					},
+					username: {
+						required: true,
+						minlength: 6,
+						maxlength: 20,
+						remote:{
+							url:"{:U('Public/check_username')}"
+						}
+					},
+					realname: {
+						required: true,
+						isCnName: true,
+					},
+					email: {
+						required: true,
+						email: true,
+						remote:"{:U('Public/check_email')}"
+					},
+					mobile: {
+						required: true,
+						isPhone: true,
+					},
+					password: {
+						required: true,
+						minlength: 6,
+						maxlength: 30,
+					},
+					repassword: {
+						required: true,
+						minlength: 6,
+						maxlength: 30,
+						equalTo: "#password"
+					},
+					code:{
+						required: true,
+						remote:"{:U('Public/checkVerify')}"
+					}
+				},
+				messages: {
+					username: {
+						remote:"登录名被占用，请换一个账号",
+						required: "请输入登录账号",
+						minlength: $.validator.format("账号不能小于{0}个字 符"),
+						maxlength: $.validator.format("账号不能超过{0}个字 符"),
+					},
+					email: {
+						required: "请输入Email地址",
+						remote:"邮箱被占用，请换一个邮箱",
+						email: "请输入正确的email地址"
+					},
+					password: {
+						required: "请输入密码",
+						minlength: $.validator.format("密码不能小于{0}个字 符")
+					},
+					repassword: {
+						required: "请输入确认密码",
+						minlength: "确认密码不能小于6个字符",
+						equalTo: "两次输入密码不一致"
+					},
+					code:{
+						required: "请输入验证码",
+						remote:"验证码错误"
+					}
+				}
+			}); //end validate
+
+		}); //end ready
+	</script>
+
+	{__NORUNTIME__}
+</block>

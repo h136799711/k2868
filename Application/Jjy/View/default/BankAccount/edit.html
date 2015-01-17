@@ -1,0 +1,103 @@
+<extend name="template/base_index" />
+
+
+<block name="area_header">
+
+</block>
+
+<block name="area_body">
+	{:W('Menus/topbar')}
+	<div class="admin-main container-fluid">
+		{:W('Menus/left')}
+		<div class="admin-main-content">
+			{:W('Menus/breadcrumb')}
+
+			<div class="table-responsive well">
+				<div class="btn-controls">
+					<a class="btn btn-sm btn-default" href="{:U('BankAccount/index')}"><i class="fa fa-reply"></i>{:L('BTN_BACK')}</a>
+				</div>
+				<div id="homepage">
+				<volist name="banks" id="vo">
+					<input value="{$vo.homepage}" type="hidden" />
+				</volist>
+				</div>
+				<form action="{:U('Jjy/BankAccount/save')}" method="post" class="bankaccountForm validateForm form-horizontal">
+					<fieldset>
+						<legend>收款账户-{:L('BTN_EDIT')}</legend>
+						<div class="form-group">
+							<label for="inputtype" class="col-md-2 col-lg-2 control-label">{:L('M_BANK_USETYPE')}</label>
+							<div class="col-md-10 col-lg-10">
+								<select name="type" id="inputtype" class="form-control  input-short"> 
+										<option value="">=请选择=</option>
+										<option value="0" <eq name="entity.type" value="0">selected=selected</eq> >手动存款账号</option>	
+										<option value="1" <eq name="entity.type" value="1">selected=selected</eq> >速汇账号</option>								
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputaccountnanme" class="col-md-2 col-lg-2 control-label">{:L('M_BANK_TYPE')}</label>
+							<div class="col-md-10 col-lg-10">
+								<select name="bank_type" id="banktype" class="form-control  input-short"> 
+										<option value="">=请选择=</option>
+									<volist name="banks" id="vo">
+										<option value="{$key}" <eq name="entity.bank_type" value="$key">selected="selected"</eq>>{$vo.name}</option>
+									</volist>									
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputbank_url" class="col-md-2 col-lg-2 control-label">{:L('M_BANK_URL')}</label>
+							<div class="col-md-10 col-lg-10">
+								<input type="text" class="required form-control input-short" name="bank_url" id="inputbank_url" value="{$entity.bank_url}" placeholder="{:L('PLACEHOLDER_BANK_URL')}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputaccountnanme" class="col-md-2 col-lg-2 control-label">{:L('M_BANKACCOUNT_PEPOLENAME')}</label>
+							<div class="col-md-10 col-lg-10">
+								<input type="text" class="required form-control input-short" name="account_name" id="inputaccountname" value="{$entity.account_name}"  placeholder="{:L('PLACEHOLDER_BANKACCOUNT_PEPOLENAME')}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputbankname" class="col-md-2 col-lg-2 control-label">{:L('M_BANKACCOUNT_BANKNAME')}</label>
+							<div class="col-md-10 col-lg-10">
+								<input type="text" class="required form-control input-short" name="bank_name" id="inputbankname" value="{$entity.bank_name}"  placeholder="{:L('PLACEHOLDER_BANKACCOUNT_BANKNAME')}">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label for="inputaccount" class="col-md-2 col-lg-2 control-label">{:L('M_BANKACCOUNT_ACCOUNT')}</label>
+							<div class="col-md-10 col-lg-10">
+								<input type="text" class="required form-control input-short" name="account" id="inputaccount" value="{$entity.account}" placeholder="{:L('PLACEHOLDER_BANKACCOUNT_ACCOUNT')}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="inputaccount" class="col-md-2 col-lg-2 control-label">&nbsp;</label>
+							<div class="col-md-10 col-lg-10">
+							<a target-form="bankaccountForm" class="ajax-post btn btn-primary" href="{:U('Jjy/BankAccount/save',array('id'=>$entity['id']))}" autofocus="autofocus"><i class="fa fa-save"></i> {:L('BTN_SAVE')}</a>
+							<!--<a class="btn btn-primary" href="{:U('Jjy/BankAccount/index')}"><i class="fa fa-times-circle"></i> {:L('BTN_REFRESH')}</a>-->
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+		<!-- END admin-main-content -->
+	</div>
+	<!-- END admin-main-->
+</block>
+
+<block name="area_footer">
+	<script type="text/javascript">
+		$(function(){
+			$("#banktype").change(function(){
+				var va = $("#banktype").val();
+				if(va >= 0){
+					var homepage = $("#homepage input").get(va);
+					if(homepage){
+						$("#inputbank_url").val(homepage.value);
+					}
+				}
+			});
+		});
+	</script>
+</block>

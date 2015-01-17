@@ -1,0 +1,375 @@
+<extend name="template/home_index" />
+
+<block name="area_header">
+	<link rel="stylesheet" type="text/css" media="all" href="__CDN__/jquery-datetimepicker/jquery.datetimepicker.css">
+</block>
+<block name="area_body">
+	<div class="body-content clearfix">
+		<include file="header_nav" active="1"/>
+		
+		<div class="row col-lg-12 col-md-12 help-block">您好,此界面仅供您查询收款账号及存款成功后提交详细存款信息供审核人员查询及确认,并不具备转账及扣款功能.如您未进行或未完成存款操作请不要随意提交存款信息.感谢配合.</div>
+
+		<!-- Nav tabs -->
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" class="active">
+				<a href="#manualDepositAccount" data-toggle="tab">获取收款方信息</a>
+			</li>
+			<li role="presentation"><a href="#manualDepositsub" role="tab" data-toggle="tab">提交存款信息</a>
+			</li>
+		</ul>
+
+		<div class="tab-content clearfix" style="width: 100%;">
+			<div role="tabpanel" class="tab-pane fade in active" id="manualDepositAccount">
+				<form class="form-horizontal">
+					<fieldset>
+						<legend></legend>
+					<div class="form-group">
+						<label class="control-label col-lg-2 col-md-2">交易平台账号</label>
+						<div class="col-lg-10 col-md-10">
+							<label class="control-label bg-primary remark">{$user}</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-lg-2 col-md-2">银行类别</label>
+						<div class="col-lg-5 col-md-5">
+							<select id="banktype" class="form-control">
+								<option value="0">=请选择银行类别=</option>
+								<volist name="banks" id="vo">
+									<option <eq name="bankaccount.bank_type" value="$key">selected="selected"</eq> value="{$key}">{$vo.name}</option>
+								</volist>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-lg-2 col-md-2">银行账号</label>
+						<div class="col-lg-5 col-md-5">
+							<label id="account" class="form-control text-primary">{$bankaccount.account|default='请选择银行类别自动获取'}</label>
+						</div>
+						<div class="col-lg-5 col-md-5">
+							<a href="#" id="accountcopy" class="btn btn-primary copybutton" data-clipboard-text="{$bankaccount.account|default=''}">复制银行账号</a>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-lg-2 col-md-2">收款人姓名</label>
+						<div class="col-lg-5 col-md-5">
+							<label id="accountname" class="form-control  text-primary">{$bankaccount.account_name|default='请选择银行类别自动获取'}</label>
+						</div>
+						<div class="col-lg-5 col-md-5">
+							<a href="#" id="accountnamecopy" class="btn btn-primary copybutton" data-clipboard-text="{$bankaccount.account_name|default=''}">复制收款人姓名</a>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-lg-2 col-md-2">开户行地址</label>
+						<div class="col-lg-5 col-md-5">
+							<label id="bankaddress" class="form-control  text-primary">{$bankaccount.bank_name|default='请选择银行类别自动获取'}</label>
+						</div>
+						<div class="col-lg-5 col-md-5">
+							<a href="#" id="bankaddresscopy" class="btn btn-primary copybutton" data-clipboard-text="{$bankaccount.bank_name|default=''}">复制开户行地址</a>
+						</div>
+					</div>
+					</fieldset>
+				</form>
+			</div>
+			<div role="tabpanel" class="tab-pane fade" id="manualDepositsub">
+
+				<form class="depostForm validate-form form-horizontal col-lg-10 center-block" method="post">
+
+
+
+					<input id="deposit_username" name="deposit_username" type="hidden" value="{$bankaccount.account_name|default=''}" />
+					<input id="deposit_bank_address" name="deposit_bank_address" type="hidden" value="{$bankaccount.bank_name|default=''}" />
+					<input id="deposit_bank_account" name="deposit_bank_account" type="hidden" value="{$bankaccount.account|default=''}" />
+
+					<fieldset>
+						<legend></legend>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">交易平台账号</label>
+							<div class="col-lg-10 col-md-10">
+								<label class="control-label bg-primary remark">{$user}</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">银行类别</label>
+							<div class="col-lg-5 col-md-5">
+								<select id="banktype2" class="form-control">
+									<option value="0">=请选择银行类别=</option>
+									<volist name="banks" id="vo">
+										<option <eq name="bankaccount.bank_type" value="$key">selected="selected"</eq> value="{$key}">{$vo.name}</option>
+									</volist>
+								</select>
+							</div>
+							<div class="col-lg-5 col-md-5">
+								<a id="homepage" class="btn btn-link" target="_blank" href="#"></a>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">银行账号</label>
+							<div class="col-lg-5 col-md-5">
+								<label id="account2" class="form-control text-primary">{$bankaccount.account|default='请选择银行类别自动获取'}</label>
+							</div>
+							<div class="col-lg-5 col-md-5">
+								<a href="#" id="accountcopy2" class="btn btn-primary copybutton" data-clipboard-text="{$bankaccount.account|default=''}">复制银行账号</a>
+							</div>
+
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">收款人姓名</label>
+							<div class="col-lg-5 col-md-5">
+								<label id="accountname2" class="form-control  text-primary">{$bankaccount.account_name|default='请选择银行类别自动获取'}</label>
+							</div>
+							<div class="col-lg-5 col-md-5">
+								<a href="#" id="accountnamecopy2" class="btn btn-primary copybutton" data-clipboard-text="{$bankaccount.account_name|default=''}">复制收款人姓名</a>
+							</div>
+
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">开户行地址</label>
+							<div class="col-lg-5 col-md-5">
+								<label id="bankaddress2" class="form-control  text-primary">{$bankaccount.bank_name|default='请选择银行类别自动获取'}</label>
+							</div>
+							<div class="col-lg-5 col-md-5">
+								<a href="#" id="bankaddresscopy2" class="btn btn-primary copybutton" data-clipboard-text="{$bankaccount.bank_name|default=''}">复制开户行地址</a>
+
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">货币</label>
+							<div class="col-lg-5 col-md-5">
+								<select name="currency" disabled="disabled" class="form-control disabled">
+									<option value="0">人民币</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">*本次存款金额</label>
+							<div class="col-lg-5 col-md-5">
+								<input name="money" class="form-control" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">*存款方式</label>
+							<div class="col-lg-5 col-md-5">
+								<select name="depositType" id="methods" class="form-control">
+									<option value="0" selected="selected">柜台转帐 </option>
+									<option value="1">ATM转帐 </option>
+									<option value="2">网银转帐 </option>
+									<option value="3">电话转账 </option>
+									<option value="4">跨行网银转账</option>
+									<option value="5">自动终端机</option>
+									<option value="6">手机转账</option>
+									<option value="7">支付宝转账</option>
+									<option value="8">其他方式</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">*存款时间</label>
+							<div class="col-lg-5 col-md-5">
+								<input name="transaction_date" id="transaction_date" class="form-control" value="{:date(" Y-m-d H:i:s ",time())}"/>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">*存款人姓名</label>
+							<div class="col-lg-5 col-md-5">
+								<input name="username" class="form-control" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">*备注信息</label>
+							<div class="col-lg-5 col-md-5">
+								<input name="remark" class="form-control" />
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-lg-2 col-md-2">&nbsp;</label>
+							<div class="col-lg-5 col-md-5">
+								<a href="#" url="{:U('Jjy/RemittanceRecord/add')}" class="btn btn-primary ajax-post" target-form="depostForm">{:L('BTN_SAVE')}</a>
+							</div>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+
+	</div>
+	<include file="footer_nav" /> {__NORUNTIME__}
+</block>
+<block name="area_footer">
+	<script type="text/javascript" src="__CDN__/jquery-datetimepicker/jquery.datetimepicker.js"></script>
+	<script type="text/javascript" src="__CDN__/jquery-validation/1.13.1/jquery.validate.min.js"></script>
+	<script type="text/javascript" src="__CDN__/jquery-validation/1.13.1/localization/messages_zh.min.js"></script>
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="__CDN__/zeroclipboard/2.0.0/ZeroClipboard.min.js"></script>
+	<![endif]-->
+	<!--[if !IE]><!--> 
+	<script type="text/javascript" src="__CDN__/zeroclipboard/2.2.0/ZeroClipboard.min.js"></script>
+		<!--<![endif]-->
+	<script type="text/javascript">
+		$(function() {
+			//获取账号
+			$("#banktype").change(function() {
+				$.ajax({
+					url: "{:U('Jjy/BankAccount/getAccounts')}",
+					type: "POST",
+					dataType: "json",
+					data: {
+						'banktype': $("#banktype").val()
+					}
+				}).done(function(data) {
+					//console.log(data);
+					if (data.status) {
+
+						if (data.info && data.info.length > 0) {
+							$("#account").text(data.info[0].account);
+							$("#accountname").text(data.info[0].account_name);
+							$("#bankaddress").text(data.info[0].bank_name);
+							$("#accountcopy").attr("data-clipboard-text", data.info[0].account);
+							$("#accountnamecopy").attr("data-clipboard-text", data.info[0].account_name);
+							$("#bankaddresscopy").attr("data-clipboard-text", data.info[0].bank_name);
+							return;
+						} else {
+							$.scojs_message("抱歉暂时未开通此银行接口，请换一个！", $.scojs_message.TYPE_ERROR);
+						}
+					} else {
+						$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
+					}
+
+					$("#account").text("请重新选择银行类别");
+					$("#accountname").text("请重新选择银行类别");
+					$("#bankaddress").text("请重新选择银行类别");
+					$("#accountcopy").attr("data-clipboard-text", "");
+					$("#accountnamecopy").attr("data-clipboard-text", "");
+					$("#bankaddresscopy").attr("data-clipboard-text", "");
+
+				}).fail(function() {
+					$.scojs_message("网络错误，请重试！", $.scojs_message.TYPE_ERROR);
+				});
+			});
+
+			//获取账号
+			$("#banktype2").change(function() {
+
+				$.ajax({
+					url: "{:U('Jjy/BankAccount/getAccounts')}",
+					type: "POST",
+					dataType: "json",
+					data: {
+						'banktype': $("#banktype2").val()
+					}
+				}).done(function(data) {
+					console.log(data);
+					if (data.status) {
+
+						if (data.info && data.info.length > 0) {
+							$("#account2").text(data.info[0].account);
+							$("#accountname2").text(data.info[0].account_name);
+							$("#bankaddress2").text(data.info[0].bank_name);
+							$("#accountcopy2").attr("data-clipboard-text", data.info[0].account);
+							$("#accountnamecopy2").attr("data-clipboard-text", data.info[0].account_name);
+							$("#bankaddresscopy2").attr("data-clipboard-text", data.info[0].bank_name);
+							$("#deposit_username").val(data.info[0].account_name);
+							$("#deposit_bank_address").val(data.info[0].bank_name);
+							$("#deposit_bank_account").val(data.info[0].account);
+							$("#homepage").attr("href", data.info[0].bank_url).text(data.info[0].bank_url);;
+							return;
+						} else {
+							$.scojs_message("抱歉暂时未开通此银行接口，请换一个！", $.scojs_message.TYPE_ERROR);
+						}
+					} else {
+						$.scojs_message(data.info, $.scojs_message.TYPE_ERROR);
+					}
+
+					$("#deposit_username").val("");
+					$("#deposit_bank_address").val("");
+					$("#deposit_bank_account").val("");
+					$("#account2").text("请重新选择银行类别");
+					$("#accountname2").text("请重新选择银行类别");
+					$("#bankaddress2").text("请重新选择银行类别");
+					$("#accountcopy2").attr("data-clipboard-text", "");
+					$("#accountnamecopy2").attr("data-clipboard-text", "");
+					$("#bankaddresscopy2").attr("data-clipboard-text", "");
+				}).fail(function() {
+					$.scojs_message("网络错误，请重试！", $.scojs_message.TYPE_ERROR);
+				});
+			});
+
+			$('#transaction_date').datetimepicker({
+				format: 'Y-m-d H:i:s',
+				lang: 'ch',
+				step: 1
+			});
+
+			$(".depostForm").validate({
+				errorPlacement: function(error, element) {
+					$(".checked", element.parent()).remove();
+					error.appendTo(element.parent());
+				},
+				success: function(label) {
+					label.removeClass("error").addClass("checked").text("Ok!");
+				},
+				//					submitHandler: function(form) 
+				//					   {      
+				//					      $(form).ajaxSubmit();     
+				//					   }  ,
+				rules: {
+					money: {
+						required: true,
+						number: true,
+						min: 0,
+					},
+					transaction_date: {
+						required: true,
+						date: true,
+					},
+					username: {
+						required: true,
+					},
+					remark: {
+						required: true,
+					}
+				},
+				messages: {
+					remark: {
+						required: "请输入备注信息",
+					},
+					username: {
+						required: "请输入汇款人姓名",
+					},
+					transaction_date: {
+						required: "请输入汇款时间",
+						date: "时间格式不正确",
+					},
+					money: {
+						required: "请输入汇款金额",
+					},
+
+
+				}
+			}); //end validate
+
+		});
+	</script>
+
+
+	<script type="text/javascript">
+		$(function() {
+			var client = new ZeroClipboard($(".copybutton"));
+
+			client.on("ready", function(readyEvent) {
+
+				client.on("aftercopy", function(event) {
+					var text = event.data['text/plain'];
+					if (!text) {
+						alert("复制失败！");
+					} else {
+						alert("复制成功！");
+					}
+				});
+			});
+		});
+	</script>
+
+	{__NORUNTIME__}
+
+</block>
