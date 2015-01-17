@@ -207,7 +207,7 @@ class RemittanceRecordController extends JjyController {
 		if (!empty($remitname)) {
 			$map['username'] = array('like', '%' . $remitname . '%');
 			$params['remitname'] = $remitname;
-		}
+		} 
 		
 		// 获取数据内容	
 		$fields = "money,deposit_type,userid,username,remark,transaction_date,create_time,status";
