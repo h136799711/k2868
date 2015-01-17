@@ -210,8 +210,8 @@ class RemittanceRecordController extends JjyController {
 		}
 		
 		// 获取数据内容	
-		$fields = "money,deposit_type,userid,username,remark,transaction_date,create_time";
-		$order = 'create_time desc';
+		$fields = "money,deposit_type,userid,username,remark,transaction_date,create_time,status";
+		$order = 'status desc';
 		$result = apiCall('Jjy/RemittanceRecord/queryNoPaging', array($map, $order, $fields));
 		if($result['status']){
 			$exceldata = $this->getExcelData($result['info']);
@@ -248,6 +248,7 @@ class RemittanceRecordController extends JjyController {
 							 'transaction_date'=>date('Y-m-d H:i:s',$vo['transaction_date']),
 							 'create_time'=>date('Y-m-d H:i:s',$vo['create_time']),
 							'remark'=>$vo['remark'],
+							'status'=>getStatus($vo['status']),
 						));
 		}
 		
@@ -262,7 +263,7 @@ class RemittanceRecordController extends JjyController {
 		}
 		$exceldata = S(session_id().'_exceldata_'.$excelid);
 		if(	$exceldata != false){
-			phpExcelExportRemittanceRecord($exceldata,array('序号','存款金额','存款方式','姓名','汇款时间','记录时间','备注信息'),$excelid,$excelid);
+			phpExcelExportRemittanceRecord($exceldata,array('序号','存款金额','存款方式','姓名','汇款时间','记录时间','备注信息','数据状态'),$excelid,$excelid);
 //			exportToExcel($exceldata,array('序号','存款金额','存款方式','姓名','     \t汇款时间','\t记录时间            ','备注信息'),$excelid);
 		}else{
 			$this->error("没有相关数据");
