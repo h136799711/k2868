@@ -108,7 +108,8 @@ class HomeController extends BaseController {
 	/**
 	 * TODO:查询汇款记录历史
 	 */
-//	public function remitHistory() {
+	public function remitHistory() {
+		redirect(U('Home/manualdeposit'));
 //		$this->checkLogin();
 //		
 //		$status = I('status', '');
@@ -156,7 +157,7 @@ class HomeController extends BaseController {
 //		} else {
 //			$this -> error(L('ERR_SYSTEM_BUSY'));
 //		}
-//	}
+	}
 	/**
 	 * 选择存款方式
 	 */
